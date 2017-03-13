@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title></title>
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="/myd/js/jquery-2.2.3.min.js"></script>
+
+
+
+<script type="text/javascript">
+	var nameFT = false;
+	var pawFT = false;
+	var repawFT = false;
+	var pnumFT = false;
+	var mailFT = false;
+
+	/*
+	 *用户名的提示	
+	 */
+
+	function alertUserName() {
+		var $namei = $("#namei");
+		$namei.html("请不要超过30个字符");
+	}
+
+	/*
+	 *密码的提示
+	 */
+	 
+	function alertUserPaw() {
+		var $pawi = $("#pawi");
+		$pawi.html("密码由3-30个字符和数字组成");
+	
+	}
+	
+	/*
+	 *手机号码的提示
+	 */
+	function alertUserpunm() {
+		var $pnumi = $("#pnumi");
+		$pnumi.html("请填写11位手机号码");
+	}
+
+	/**
+	 *邮箱的提示
+	 */
+	function alertMail() {
+		var $maili = $("#maili");
+		$maili.html("请输入正确的邮箱号");
+	}
+
+	/*
+	 *ajax验证 name
+	 *
+	 */
+	function verifyName() {
+
+		var name = $("#name").val();
+		var $namei = $("#namei");
+
+		$.get("/myd/vipServlet.action?optype=verifyName", {
+			name : name
+		}, function(data) {
+			if ("false" == data) {
+				nameFT = true;
+				$namei.html("<img src='/myd/icon/true.png' width='25' >");
+			} else {
+				nameFT = false;
+				$namei.html("<img src='/myd/icon/false.png' width='25' >");
+			}
+
+		});
+
+	}
+	/*
+	 *检验密码长度
+	 */
+	function verifyPaw() {
+
+		var paw = $("#paw").val();
+
+		var $pawi = $("#pawi");
+
+		if (paw.length < 3) {
+
+			$pawi.html("<img src='/myd/icon/false.png' width='25' >");
+			pawFT = false;
+		} else {
+			pawFT = true;
+			$pawi.html("<img src='/myd/icon/true.png' width='25'   >");
+
+		}
+	}
+
+	/*
+	 *验证重密码
+	 */
+
+	function verifyRepaw() {
+		var paw = $("#paw").val();
+		var repaw = $("#repaw").val();
+		var $repawi = $("#repawi");
+
+		if (paw == repaw && pawFT) {
+			repawFT = true;
+			$repawi.html("<img src='/myd/icon/true.png' width='25' >");
+
+		} else {
+			repawFT = false;
+			$repawi.html("<img src='/myd/icon/false.png' width='25'   >");
+		}
+	}
+
+	/*
+	 *判断手机号码
+	 */
+
+	function verifyPum() {
+		var pnum = $("#pnum").val();
+		var $pnumi = $("#pnumi");
+
+		if (pnum.length == 11 && !isNaN(pnum)) {
+			pnumFT = true;
+			$pnumi.html("<img src='/myd/icon/true.png' width='25'   >");
+		} else {
+			pnumFT = false;
+			$pnumi.html("<img src='/myd/icon/false.png' width='25'   >");
+		}
+	}
+
+	function verifyMail() {
+		var mail = $("#mail").val();
+		var $maili = $("#maili");
+
+		$.post("/myd/vipServlet.action?optype=verifyMail", {
+			mail : mail
+		}, function(data) {
+			if ("false" == data) {
+				mailFT = true;
+				$maili.html("<img src='/myd/icon/true.png' width='25'   >");
+
+			} else {
+				mailFT = false;
+				$maili.html("<img src='/myd/icon/false.png' width='25'   >");
+			}
+		});
+	}
+
+	function bt(obj) {
+		//alert(obj);
+
+		if (nameFT && pawFT && repawFT && pnumFT) {
+			obj.type = "submit";
+			alert("系统已经向您的邮箱地址发送了一条验证信息，请注意查阅！")
+		}
+	}
+</script>
+
+
+</head>
+<body>
+
+	<center>
+		<font color="blue" style="font-size: 20px">会员注册</font>
+	</center>
+	
+	<div class="formbody">
+		<form action="/myd/vipServlet.action?optype=saveVip" method="post">
+
+			<ul class="forminfo">
+				<li><input type="hidden" name="optype" value="saveVip" /></li>
+
+
+				<li><label>会员用户名<b>*</b></label><input name="name" id="name"
+					type="text" class="dfinput" onfocus="alertUserName()"
+					onchange="verifyName()" /> <i id="namei"></i></li>
+
+				<li><label>密码<b>*</b></label><input name="paw" id="paw"
+					type="password" class="dfinput" onfocus="alertUserPaw()"
+					onchange="verifyPaw()" /><i id="pawi"></i></li>
+
+
+				<li><label>重复密码<b>*</b></label><input name="repaw" id="repaw"
+					type="password" class="dfinput" onchange="verifyRepaw()" /><i
+					id="repawi"></i></li>
+
+
+				<li><label>会员电话号码<b>*</b></label><input name="pnum" id="pnum"
+					type="text" class="dfinput" onfocus="alertUserpunm()"
+					onchange="verifyPum()" /><i id="pnumi"></i></li>
+
+
+				<li><label>会员员邮箱<b>*</b></label><input name="mail" id="mail"
+					type="email" class="dfinput" onchange="verifyMail()" /><i
+					id="maili"></i></li>
+
+
+				<li><label>地址<b>*</b>
+				</label> <textarea name="adress" class="textinput"></textarea></li>
+
+				<li><label>&nbsp;</label><input type="button" class="btn"
+					value="确认" onfocus="alertMail()" onclick="bt(this)" /></li>
+			</ul>
+		</form>
+
+	</div>
+
+</body>
+
+</html>

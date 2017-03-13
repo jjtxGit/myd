@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title></title>
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="/myd/js/jquery-2.2.3.min.js"></script>
+
+
+
+<script type="text/javascript">
+	/*
+	 *用户名的提示	
+	 */
+
+	function alertUserName() {
+		var $namei = $("#namei");
+		$namei.html("请不要超过30个字符");
+	}
+
+	/*
+	 *密码的提示
+	 */
+	function alertUserPaw() {
+		var $pawi = $("#pawi");
+		$pawi.html("密码由3-30个字符和数字组成");
+	}
+
+	function bt(obj) {
+		var name = $("#name").val();
+		var paw = $("#paw").val();
+
+		$.get("/myd/vipServlet.action?optype=verifyVip", {
+			name : name,
+			paw : paw
+		}, function(data) {
+			if ("true" == data) {
+				location.href = "/myd/vipServlet.action?optype=loginVip&name="
+						+ name;
+			} else {
+				$("#font").html("用户名或者密码错误");
+				document.getElementById("paw").value = "";
+				document.getElementById("name").focus();
+			}
+		});
+
+	}
+</script>
+
+
+</head>
+<body>
+
+	<center>
+		<font color="blue" style="font-size: 20px">会员登陆</font>
+	</center>
+
+	<br />
+	<br />
+
+	<div class="formbody">
+		<form action="/myd/vipServlet.action?optype=saveVip" method="post">
+
+
+			<ul class="forminfo">
+				<li><label>会员用户名<b>*</b></label><input name="name" id="name"
+					type="text" class="dfinput" onfocus="alertUserName()" /> <i
+					id="namei"></i></li>
+
+				<li><label>管理员密码<b>*</b></label><input name="paw" id="paw"
+					type="password" class="dfinput" onfocus="alertUserPaw()"
+					onchange="verifyPaw()" /><i id="pawi"></i></li>
+				<li>
+					<center>
+						<font color="blue" style="font-size: 20px" id="font"></font>
+					</center>
+				</li>
+
+				<li><label>&nbsp;</label><input type="button" class="btn"
+					value="确认" onfocus="alertMail()" onclick="bt(this)" /></li>
+			</ul>
+		</form>
+
+	</div>
+
+</body>
+
+</html>

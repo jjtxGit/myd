@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>admin</display-name>
+	<welcome-file-list>
+		<welcome-file>/error.html</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>DruidStatView</servlet-name>
+		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DruidStatView</servlet-name>
+		<url-pattern>/druid/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>VipServlet</servlet-name>
+		<servlet-class>com.shxt.servlet.VipServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>VipServlet</servlet-name>
+		<url-pattern>/vipServlet.action</url-pattern>
+	</servlet-mapping>
+	<filter>
+		<filter-name>charCodeFilter</filter-name>
+		<filter-class>com.shxt.filter.CharCodeFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>charCodeFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>shopeServlet</servlet-name>
+		<servlet-class>com.shxt.servlet.ShopeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>shopeServlet</servlet-name>
+		<url-pattern>/shopeServlet.action</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>imgServlet</servlet-name>
+		<servlet-class>com.shxt.servlet.ImgServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>imgServlet</servlet-name>
+		<url-pattern>/imgServlet.action</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>foodServlet</servlet-name>
+		<servlet-class>com.shxt.servlet.FoodServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>foodServlet</servlet-name>
+		<url-pattern>/foodServlet.action</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>publicServlet</servlet-name>
+		<servlet-class>com.shxt.servlet.PublicServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>publicServlet</servlet-name>
+		<url-pattern>/publicServlet.action</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>androidServlet</servlet-name>
+		<servlet-class>com.shxt.servlet.AndroidServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>androidServlet</servlet-name>
+		<url-pattern>/androidServlet.action</url-pattern>
+	</servlet-mapping>
+
+
+</web-app>

@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//WebContent/shope.jsp=UTF-8
+encoding//WebContent/show_shope_infor.jsp=UTF-8
+encoding//WebContent/update_shope_infor1.jsp=UTF-8
+encoding//src/com/shxt/dao/VipDao.java=UTF-8
+encoding//src/com/shxt/filter/CharCodeFilter.java=UTF-8
+encoding//src/com/shxt/service/VipService.java=UTF-8
+encoding//src/com/sxht/service/mail/MailSender.java=UTF-8

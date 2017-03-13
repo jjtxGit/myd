@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript">
+	var curIndex = 0;
+	//时间间隔 单位毫秒 
+	var timeInterval = 2000;
+
+	var arr = new Array();
+
+	arr[0] = "imgs/add1.png";
+	arr[1] = "imgs/add2.gif";
+	arr[2] = "imgs/add3.gif";
+	arr[3] = "imgs/add4.gif";
+	arr[4] = "imgs/add5.gif";
+	arr[5] = "imgs/add6.gif";
+
+	setInterval(changeImg, timeInterval);//图片轮播
+
+	function changeImg() {
+		var obj = document.getElementById("imgs");
+		if (curIndex == arr.length - 1) {
+			curIndex = 0;
+		} else {
+			curIndex += 1;
+		}
+		obj.src = arr[curIndex];
+	}
+</script>
+</head>
+<body>
+
+	<center>
+		<font size="20" color="#2BD5D5"><strong>美易点美食吧欢迎您</strong></font> <br>
+		<img id=imgs src="imgs/add6.gif" border=0 />
+	</center>
+</body>
+</html>
